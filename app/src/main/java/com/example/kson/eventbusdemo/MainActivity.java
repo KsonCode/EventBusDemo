@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,19 +18,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //注册当前对象给eventbus
-//        EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
     }
 
-//    /**
-//     *
-//     * @param msg
-//     */
-//    @Subscribe
-//    public void receiveMsg(String msg){
-//
-//        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
-//
-//    }
+    /**
+     *
+     * @param msg
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN,priority = 1)
+    public void receiveMsg(String msg){
+
+        System.out.println("receive:"+Thread.currentThread().getName());
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+
+
+    }
 //
 //    @Subscribe
 //    public void receiveUser(User user){
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public void to2(View view) {
 
         //粘性事件
-        EventBus.getDefault().postSticky("我是1");
+//        EventBus.getDefault().postSticky("我是1");
 
         startActivity(new Intent(this,Main2Activity.class));
 
