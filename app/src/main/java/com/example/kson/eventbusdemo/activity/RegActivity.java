@@ -10,6 +10,9 @@ import com.example.kson.eventbusdemo.api.ApiService;
 import com.example.kson.eventbusdemo.api.UserApiService;
 import com.example.kson.eventbusdemo.bean.UserRegBean;
 
+import java.util.HashMap;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -72,6 +75,32 @@ public class RegActivity extends AppCompatActivity {
 //
 //            }
 //        });
+
+        userApiService.reg2(ApiService.REG_URL,new HashMap<String, String>()).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+        userApiService.listRepos("1").enqueue(new Callback<UserRegBean>() {
+            @Override
+            public void onResponse(Call<UserRegBean> call, Response<UserRegBean> response) {
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<UserRegBean> call, Throwable t) {
+
+            }
+        });
 
 
     }
